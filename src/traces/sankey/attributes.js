@@ -170,6 +170,14 @@ var attrs = (module.exports = overrideAll(
                 dflt: 'justify',
                 description: 'Sets the alignment method used to position the nodes along the horizontal axis.'
             },
+            labelFormatter: {
+                valType: 'any',
+                dflt: null,
+                description: [
+                    'A function that formats node labels. The function receives (label, nodeWidth, nodeHeight, fontSize, nodeIndex)',
+                    'and should return the formatted label string. Useful for truncating long labels to fit node dimensions.'
+                ].join(' ')
+            },
             description: 'The nodes of the Sankey plot.'
         },
 

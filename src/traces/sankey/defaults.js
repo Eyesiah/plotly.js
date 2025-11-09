@@ -35,6 +35,7 @@ module.exports = function supplyDefaults(traceIn, traceOut, defaultColor, layout
     handleHoverLabelDefaults(nodeIn, nodeOut, coerceNode, hoverlabelDefault);
     coerceNode('hovertemplate');
     coerceNode('align');
+    coerceNode('labelFormatter');
 
     var colors = layout.colorway;
 

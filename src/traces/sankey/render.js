@@ -1041,7 +1041,21 @@ module.exports = function(gd, svg, calcData, layout, callbacks) {
 
     nodeLabel
         .attr('data-notex', 1) // prohibit tex interpretation until we can handle tex and regular text together
-        .text(function(d) { return d.node.label; })
+        .text(function(d) {
+            var label = d.node.label;
+            var formatter = d.trace.node.labelFormatter;
+            if(typeof formatter === 'function') {
+                try {
+                    var nodeWidth = d.node.x1 - d.node.x0;
+                    var nodeHeight = d.node.y1 - d.node.y0;
+                    var fontSize = d.textFont.size;
+                    label = formatter(label, nodeWidth, nodeHeight, fontSize, d.index);
+                } catch(e) {
+                    Lib.warn('Error in node labelFormatter:', e);
+                }
+            }
+            return label;
+        })
         .each(function(d) {
             var e = d3.select(this);
             Drawing.font(e, d.textFont);
